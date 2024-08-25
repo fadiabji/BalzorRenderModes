@@ -1,0 +1,28 @@
+﻿@using BalzorRenderModes.Api
+
+
+<div class="p-3">
+
+    <h3>RenderModeTest Component</h3>
+
+    <p>@Counter</p>
+    <button @onclick="TestClick">Test Btn</button>
+</div>
+
+@code {
+    [Inject]
+    private ICounterApi counterApi { get; set; }
+
+    private int Counter { get; set; } = 0;
+
+    protected override Task OnInitializedAsync()
+    {
+        return base.OnInitializedAsync();
+    }
+
+    private async Task TestClick()
+    {
+        Counter = await counterApi.Increment(Counter);
+        StateHasChanged();
+    }
+}
